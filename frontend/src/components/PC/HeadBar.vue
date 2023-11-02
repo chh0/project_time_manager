@@ -12,6 +12,7 @@ const Date2String = (date) => {
     return str
 }
 
+// TODO: pace should change according to view length
 const ChangeViewDay = (mode) => {
     // alert( view_date.value)
     if (mode === "LEFT") {
@@ -66,7 +67,7 @@ const display_comment = inject('display_comment')
 <template>
     <div class="HeadBar">
         <div class="HeadBarItem HeadBar_today">
-            <span @click="ResetViewDay">今日：{{ today }}</span>
+            <span @click="ResetViewDay()">今日：{{ today }}</span>
         </div>
         <div class="HeadBarItem HeadBar_viewday">
             <span class="HeadBar_viewday_changer" @click="ChangeViewDay('LEFT')">&nbsp;◀&nbsp;</span>

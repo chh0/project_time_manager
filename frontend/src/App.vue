@@ -1,5 +1,5 @@
 <script setup>
-import { provide, reactive, ref } from 'vue';
+import { provide, reactive, ref, readonly } from 'vue';
 import ChoosePlatform from './components/ChoosePlatform.vue'
 
 const view_date = reactive({'value':new Date( (new Date()).getFullYear(), (new Date()).getMonth(), (new Date()).getDate(), (new Date()).getHours(), (new Date()).getMinutes(), (new Date()).getSeconds() )})
@@ -10,7 +10,7 @@ const view_length = reactive({value:{
   names:   ['一年',       '半年',      '季度',         '两月',        '一月',  '三周',        '两周',       '一周', '五天',       '三天',       '一天', '　　']
 }})
 
-const display_comment = ref(true)
+const display_comment = ref(false)
 
 const get_display_width = () => {
   return document.body.clientWidth-300
@@ -51,12 +51,60 @@ const num2hanzi = (num) => {
   return '表里没有'
 }
 
+const task_data0 = {
+    order:['123', '432'],
+    content:{
+        '123':{
+            name:'123',
+            start:1698817431154,
+            end:1698827431154,
+            comment:'this is 123',
+            color:'#AABBCC',
+            unfold:true,
+            order:['c2', 'c1'],
+            content:{
+                'c1':{
+                    name:'123_c1',
+                    start:1698817454154,
+                    end:1698820431154,
+                    comment:'this is 123_c1'
+                },
+                'c2':{
+                    name:'123_c2',
+                    start:1698822431154,
+                    end:1698825431154,
+                    comment:'this is 123_c2'
+                }
+            }
+        },
+        '432':{
+            name:'432',
+            start:1698817431154,
+            end:1698887431154,
+            comment:'this is 432',
+            color:'#FF0000',
+            unfold:true,
+            order:[],
+            content:{}
+        }
+    }
+}
+
+const task_data = reactive({value:task_data0})
+
+const change_data = (f) => {
+    f(task_data.value)
+}
+
 provide('view_date', view_date)
 provide('view_length', view_length)
 provide('display_comment', display_comment)
 provide('get_display_width', get_display_width)
 provide('get_length', get_length)
 provide('num2hanzi', num2hanzi)
+provide('task_data', readonly(task_data)) // may have error, no error up to now
+provide('change_data', change_data)
+
 
 </script>
 

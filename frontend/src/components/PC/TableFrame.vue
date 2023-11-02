@@ -173,24 +173,28 @@ const get_column_settings = () => {
     return res
 }
 
-const refresh = ref('refresh_the_div')
-onMounted(() => {
-    refresh.value='refreshed_the_div'
-})
 
-const f = () => { console.log(get_column_settings()) }
+// force refresh when loading or resizing
+const refresh_in_tableframe = ref('refresh_the_div')
+const refrashfunc_in_tableframe = () => {refresh_in_tableframe.value=''+Number(new Date())}
+onMounted( () => { refrashfunc_in_tableframe() } )
+window.addEventListener("resize", refrashfunc_in_tableframe, false)
+
+
+// const f = () => { console.log(get_column_settings()) }
 
 </script>
 
 <template>
     <div class="TableFrame">
-        <div class="TableFrame_Tasks" @click="f"></div>
+        <div class="TableFrame_Tasks"></div>
+        <!-- <div class="TableFrame_Tasks" @click="f"></div> -->
         <div class="TableFrame_TimeTable">
             <div class="TableFrame_TimeTable_Columns"
                  v-for="item of get_column_settings()"
                  :style="{width:item.width+'px'}"
                  :class="item.class"
-                 :key="refresh"
+                 :key="refresh_in_tableframe"
             >{{ item.name }}</div>
             <!-- <div class="TableFrame_TimeTable_Columns">123</div>
             <div class="TableFrame_TimeTable_Columns TableFrame_TimeTable_Columns_Light">123</div>
@@ -209,6 +213,7 @@ const f = () => { console.log(get_column_settings()) }
         font-size: 20px;
         -webkit-user-select: none;
         user-select: none;
+        white-space: nowrap;
     }
 
     .TableFrame_Tasks {
@@ -229,6 +234,8 @@ const f = () => { console.log(get_column_settings()) }
 
     .TableFrame_TimeTable_Columns {
         font-size: 16px;
+        color: #888888;
+        font-weight: bolder;
         white-space: nowrap;
         text-align: center;
         display: inline-block;

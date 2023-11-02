@@ -15,4 +15,9 @@ import Tasks from './Tasks.vue';
 </template>
 
 <style scoped>
+
+.PC {
+    overflow-x: hidden; /* hide stroll bar in x direction */
+}
+
 </style>
