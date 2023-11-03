@@ -3,6 +3,7 @@
 import HeadBar from './HeadBar.vue';
 import TableFrame from './TableFrame.vue'
 import Tasks from './Tasks.vue';
+import Editor from './Editor.vue';
 
 </script>
 
@@ -11,6 +12,7 @@ import Tasks from './Tasks.vue';
         <HeadBar />
         <TableFrame />
         <Tasks />
+        <Editor />
     </div>
 </template>
 

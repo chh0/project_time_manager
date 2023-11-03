@@ -45,13 +45,22 @@ const get_length = () => {
     }
 }
 
+const Date2String = (date) => {
+    let str = ''
+    str += date.getFullYear()
+    str += '-' + ( date.getMonth()+1 < 10 ? '0' : '' ) + (date.getMonth()+1)
+    str += '-' + ( date.getDate() < 10 ? '0' : '' ) + date.getDate()
+    // str += ' ' + date.getSeconds() // test response
+    return str
+}
+
 const num2hanzi = (num) => {
   let l = ['零', '一', '二', '三', '四', '五', '六', '七', '八', '九', '十', '十一', '十二', '十三', '十四', '十五', '十六', '十七', '十八', '十九', '二十', '二十一', '二十二', '二十三', '二十四', '二十五', '二十六', '二十七', '二十八', '二十九', '三十', '三十一', '三十二']
   if (num>=0 && num <=32) return l[num]
   return '表里没有'
 }
 
-const task_data0 = {
+let task_data0 = {
     order:['123', '432'],
     content:{
         '123':{
@@ -94,7 +103,11 @@ const task_data = reactive({value:task_data0})
 
 const change_data = (f) => {
     f(task_data.value)
+    task_data0 = task_data.value
 }
+
+const editing = ref(false)
+const edit_ID = ref('')
 
 provide('view_date', view_date)
 provide('view_length', view_length)
@@ -104,6 +117,9 @@ provide('get_length', get_length)
 provide('num2hanzi', num2hanzi)
 provide('task_data', readonly(task_data)) // may have error, no error up to now
 provide('change_data', change_data)
+provide('editing', editing)
+provide('edit_ID', edit_ID)
+provide('Date2String', Date2String)
 
 
 </script>

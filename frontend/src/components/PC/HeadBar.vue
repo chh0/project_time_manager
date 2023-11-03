@@ -3,14 +3,7 @@ import { inject } from 'vue';
 import { ref } from 'vue'
 
 
-const Date2String = (date) => {
-    let str = ''
-    str += date.getFullYear()
-    str += '-' + ( date.getMonth()+1 < 10 ? '0' : '' ) + (date.getMonth()+1)
-    str += '-' + ( date.getDate() < 10 ? '0' : '' ) + date.getDate()
-    // str += ' ' + date.getSeconds() // test response
-    return str
-}
+const Date2String = inject('Date2String')
 
 // TODO: pace should change according to view length
 const ChangeViewDay = (mode) => {

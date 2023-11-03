@@ -7,6 +7,8 @@ const get_length = inject('get_length')
 const view_date = inject('view_date')
 const display_comment = inject('display_comment')
 const change_data = inject('change_data')
+const editing = inject('editing')
+const edit_ID = inject('edit_ID')
 
 const width_culculator = (item) => {
     let start = item.start
@@ -39,7 +41,10 @@ const offset_culculator = (item) => {
     }
 }
 
-
+const task_edit = (i) => {
+    editing.value = true
+    edit_ID.value = i
+}
 
 const toggle_fold = (i) => {
     // alert(task_data.value.content[i].unfold)
@@ -49,7 +54,7 @@ const toggle_fold = (i) => {
 
 let handle_title_click_internal_timer = null
 let handle_title_click_internal_timer_ended = true
-const click_interval = 150
+const click_interval = 180
 const handle_title_click = (i) => {
     // clear timer
     if ( handle_title_click_internal_timer ) { clearTimeout(handle_title_click_internal_timer) }
@@ -64,7 +69,7 @@ const handle_title_click = (i) => {
     } else {
         // double click
         handle_title_click_internal_timer_ended = true
-        alert("dblclick")
+        task_edit(i)
     }
     
 }
